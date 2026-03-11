@@ -1,0 +1,132 @@
+/* ===================================
+   Space Wars - Main Stylesheet
+   =================================== */
+
+/* CSS Variables - Design Tokens */
+:root {
+  --color-bg-dark: #0a0a0f;
+  --color-bg-panel: rgba(10, 15, 30, 0.85);
+  --color-primary: #00d4ff;
+  --color-primary-glow: rgba(0, 212, 255, 0.5);
+  --color-secondary: #ff6b35;
+  --color-danger: #ff3366;
+  --color-success: #00ff88;
+  --color-text: #e0e6ed;
+  --color-text-dim: #6b7280;
+  
+  --font-main: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  --font-display: 'Orbitron', 'Inter', sans-serif;
+  
+  --transition-fast: 150ms ease;
+  --transition-normal: 300ms ease;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--color-bg-dark);
+  font-family: var(--font-main);
+  color: var(--color-text);
+}
+
+/* Game Container - Full viewport canvas */
+#game-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+#game-container canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Loading Screen */
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0a0a0f 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+#loading-screen.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.loader-ring {
+  width: 80px;
+  height: 80px;
+  border: 3px solid var(--color-bg-panel);
+  border-top-color: var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  box-shadow: 
+    0 0 20px var(--color-primary-glow),
+    inset 0 0 20px var(--color-primary-glow);
+}
+
+.loader-text {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  letter-spacing: 0.3em;
+  color: var(--color-primary);
+  text-shadow: 0 0 10px var(--color-primary-glow);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* HUD Overlay - Future use */
+#hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Utility Classes */
+.hidden { display: none !important; }
+.fade-in { animation: fadeIn 0.5s ease forwards; }
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
